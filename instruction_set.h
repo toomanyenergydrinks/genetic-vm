@@ -5,10 +5,12 @@ typedef enum {
   POP,
   SET,
   SUB,
-  MOV
+  MOV,
+  JMP,
+  JMPA
 } InstructionSet;
 
-const char *StringInstructionSet[] = {"HLT", "PSH", "ADD", "POP", "SET", "SUB", "MOV"};
+const char *StringInstructionSet[] = {"HLT", "PSH", "ADD", "POP", "SET", "SUB", "MOV","JMP","JMPA"};
 
 typedef enum {
   A, B, C, D, E, F, 
