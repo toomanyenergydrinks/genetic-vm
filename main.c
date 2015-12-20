@@ -1,5 +1,6 @@
 #include "instruction_set.h"
 #include "test_program.h"
+#include "debug.h"
 
 /* binary translation function lifted from StackOverflow */
 char *binary_fmt(int x, char buf[16])
@@ -11,9 +12,10 @@ char *binary_fmt(int x, char buf[16])
     return s;
 }
 
+#define DEBUG 1
 #define NUM_REGISTERS 15
 #define SP 0
-#registers[ SP ]
+//registers[ SP ]
 
 // stack pointer
 int sp = -1;
@@ -34,7 +36,7 @@ int main()
   while (running)
   {
     eval(fetch());
-    ip++;  
+//    ip++;  
   }
   return 0;
 }
@@ -56,6 +58,12 @@ void decode(int instr)
   c1     = (instr & 0xF00) >> 8;
   c2     = (instr & 0xF0) >> 4;
   c3     = (instr & 0xF);
+  if (DEBUG) {
+    printf("Instruction Code: %d\r\n", instrNum);
+    printf("C1 Code: %d\r\n", c1);
+    printf("C2 Code: %d\r\n", c2);
+    printf("C3 Code: %d\r\n", c3);
+  }
 }
 
 
@@ -65,7 +73,8 @@ void eval(int instr)
   char tmp[16];
 //  printf("%s\r\n", binary_fmt(instr, tmp));
   if (instrNum <= 5) {
-    printf("%s %d %d %d (code: %d)\r\n", StringInstructionSet[instrNum], c1, c2, c3, instr);
+    if (DEBUG)
+      printf("%s %d %d %d (GENE: %d)\r\n", StringInstructionSet[instrNum], c1, c2, c3, instr);
   }
 //  exit(0);
   switch(instrNum) {
@@ -76,7 +85,8 @@ void eval(int instr)
     case MOV: {
 //      sp++;
       registers[ c1 ] = c2;
-      printf("Placed %d in register %d\n", c2, c1);
+      if (DEBUG)
+        printf("Placed %d in register %d\n", c2, c1);
 //      stack[sp] = program[++ip];
       break;
     }
@@ -87,7 +97,8 @@ void eval(int instr)
     }
     case POP: {
       registers[ c2 ] = stack[sp];
-      printf("Popped %d\n", registers[ c2 ]);
+      if (DEBUG)
+        printf("Popped %d\n", registers[ c2 ]);
       break;
     }
     case ADD: {
@@ -95,14 +106,27 @@ void eval(int instr)
       int b = registers[c2];
       int result = b + a;
       stack[sp] = result;
-      printf("Added %d to %d\n", a, b);
+      if (DEBUG)
+        printf("Added %d to %d\n", a, b);
       break;
     }
     case SUB: {
      int a = registers[c1];
      int b = registers[c2];
      int result = a - b;
+     if (DEBUG)
+       printf("Subtracted %d from %d\r\n", a, b);
      stack[sp] = result;
+    }
+    case JMP: {
+      ip = registers[c1];
+      printf("Jumped to %d\r\n", ip);
+      break;
+    }
+    case JMPA: {
+      ip = registers[registers[c1]];
+      printf("Jumped to %d\r\n", registers[registers[c1]]);
+      break;
     }
     default: {
       /* in the case of an unknown opcode, halt and freak the hell out */
@@ -110,6 +134,7 @@ void eval(int instr)
       break;
     }
   }
+  ip++;
 }
 
 int fetch() 
