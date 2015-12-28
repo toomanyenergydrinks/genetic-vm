@@ -18,4 +18,4 @@ For set of candidate functions, produce new population using crossover, mutation
 * Standardize instruction set
 * Clean up code
 * Move SP and IP to being selectable registers within the program to allow further manipulation
-* Write Root-Mean-Squared-Error function for 
+* Write Root-Mean-Squared-Error function for determining error in outputs to allow selection based on fitness
