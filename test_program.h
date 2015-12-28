@@ -29,6 +29,5 @@ void random_program() {
   int n;
   for (n=0;n<length;n++) {
     bytecode_program[n] = rand() % 80000;
-    printf("%d\r\n", bytecode_program[n]);
   }
 }
