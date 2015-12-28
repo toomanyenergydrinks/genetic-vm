@@ -2,17 +2,6 @@
 #include "test_program.h"
 #include "debug.h"
 
-/* binary translation function lifted from StackOverflow */
-/* no longer actually needed due to the debugging lib */
-char *binary_fmt(int x, char buf[16])
-{
-    char *s = buf + 16;
-    *--s = 0;
-    if (!x) *--s = '0';
-    for(; x; x/=2) *--s = '0' + x%2;
-    return s;
-}
-
 #define DEBUG 1
 #define NUM_REGISTERS 15
 #define SP 0
@@ -72,7 +61,6 @@ void eval(int instr)
 {
   decode(instr);
   char tmp[16];
-//  printf("%s\r\n", binary_fmt(instr, tmp));
   if (instrNum <= 5) {
     if (DEBUG)
       printf("%s %d %d %d (GENE: %d)\r\n", StringInstructionSet[instrNum], c1, c2, c3, instr);
