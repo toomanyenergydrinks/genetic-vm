@@ -16,7 +16,8 @@ const int program[] = {
   0x0000
 };*/
 
-int bytecode_program[100];
+# define PROGRAM_LENGTH 100
+int bytecode_program[PROGRAM_LENGTH];
 
 void random_program();
 
