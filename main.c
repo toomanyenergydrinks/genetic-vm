@@ -19,6 +19,7 @@ int running = 1;
 
 void eval(int instr);
 void decode(int instr);
+int fetch();
 
 int main() 
 {
@@ -33,7 +34,7 @@ int main()
 
 /*
   instruction decoding function:
-  take two bytes and parse out the relevant information
+  take four bytes and parse out the relevant information
 */
 
 int registers[ NUM_REGISTERS ];
