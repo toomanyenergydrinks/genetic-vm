@@ -3,6 +3,7 @@
 #include "debug.h"
 
 /* binary translation function lifted from StackOverflow */
+/* no longer actually needed due to the debugging lib */
 char *binary_fmt(int x, char buf[16])
 {
     char *s = buf + 16;
