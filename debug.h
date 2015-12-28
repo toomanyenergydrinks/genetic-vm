@@ -2,6 +2,7 @@
 
 int* int_to_bin(int integer);
 
+// currently dumps bits 4 at a time
 void bin_dump(int bitstring[])
 {
   int x = 0;
@@ -14,6 +15,7 @@ void bin_dump(int bitstring[])
   printf("\r\n");
 }
 
+// turn an integer into a binary string representation
 int* int_to_bin(int integer)
 {
   int c,k = 0;
@@ -23,5 +25,10 @@ int* int_to_bin(int integer)
     k = integer >> c;
     b[n-c] = k&1;
   }
-  bin_dump(b);
+  // there's no return function here, return the result
+}
+
+void print_bin(int integer) 
+{
+  bin_dump(int_to_bin(integer));
 }
