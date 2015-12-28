@@ -60,12 +60,10 @@ void decode(int instr)
 void eval(int instr) 
 {
   decode(instr);
-  char tmp[16];
   if (instrNum <= 5) {
     if (DEBUG)
       printf("%s %d %d %d (GENE: %d)\r\n", StringInstructionSet[instrNum], c1, c2, c3, instr);
   }
-//  exit(0);
   switch(instrNum) {
     case HLT: {
       running = 0;
@@ -118,7 +116,7 @@ void eval(int instr)
       break;
     }
     default: {
-      /* in the case of an unknown opcode, halt and freak the hell out */
+      /* in the case of an unknown opcode, halt and freak the hell out, code equivalent of a death mutation */
       running = 0;
       break;
     }
