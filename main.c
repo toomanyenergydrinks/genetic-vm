@@ -27,7 +27,6 @@ int main()
   while (running)
   {
     eval(fetch());
-//    ip++;  
   }
   return 0;
 }
@@ -60,6 +59,7 @@ void decode(int instr)
 
 void eval(int instr) 
 {
+  print_bin(instr);
   decode(instr);
   if (instrNum <= 5) {
     if (DEBUG)
