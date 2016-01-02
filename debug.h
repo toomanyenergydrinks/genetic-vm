@@ -19,13 +19,14 @@ void bin_dump(int bitstring[])
 int* int_to_bin(int integer)
 {
   int c,k = 0;
-  int b[32];
+  static int b[32];
   int n = 31;
   for(c=31;c>=0;c--) {
     k = integer >> c;
     b[n-c] = k&1;
   }
   // there's no return function here, return the result
+  return b;
 }
 
 void print_bin(int integer) 
