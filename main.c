@@ -59,7 +59,6 @@ void decode(int instr)
 
 void eval(int instr) 
 {
-  print_bin(instr);
   decode(instr);
   if (instrNum <= 5) {
     if (DEBUG)
@@ -114,6 +113,29 @@ void eval(int instr)
     case JMPA: {
       ip = registers[registers[c1]];
       printf("Jumped to %d\r\n", registers[registers[c1]]);
+      break;
+    }
+    case JMPB: {
+      ip = registers[registers[c2]];
+      printf("Jumped to %d\r\n", registers[registers[c2]]);
+      break;
+    }
+    case INC: {
+      registers[c1]++;
+      break;
+    }
+    case DEC: {
+      registers[c1]--;
+      break;
+    }
+    case MUL: {
+      break;
+    }
+    case NOP: {
+     // do nothing
+      break;
+    }
+    case AND: {
       break;
     }
     default: {
