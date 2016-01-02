@@ -7,10 +7,16 @@ typedef enum {
   SUB,
   MOV,
   JMP,
-  JMPA
+  JMPA,
+  JMPB,
+  INC,
+  DEC,
+  MUL,
+  NOP,
+  AND
 } InstructionSet;
 
-const char *StringInstructionSet[] = {"HLT", "PSH", "ADD", "POP", "SET", "SUB", "MOV","JMP","JMPA"};
+const char *StringInstructionSet[] = {"HLT", "PSH", "ADD", "POP", "SET", "SUB", "MOV","JMP","JMPA","JMPB","INC","DEC","MUL","NOP","AND"};
 
 typedef enum {
   A, B, C, D, E, F, 
