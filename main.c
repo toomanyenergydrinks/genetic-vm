@@ -12,21 +12,21 @@ int sp = -1;
 int stack[256];
 
 // instruction pointer
-int ip = 0;
-
 // system state
 int running = 1;
 
-void eval(int instr);
+void eval(int ip, int instr);
 void decode(int instr);
-int fetch();
+int fetch(int bytecode_program[100], int ip);
 
 int main() 
 {
+  int ip = 0;
+
   random_program();
   while (running)
   {
-    eval(fetch());
+    eval(ip, fetch(bytecode_program, ip));
   }
   return 0;
 }
@@ -57,7 +57,7 @@ void decode(int instr)
 }
 
 
-void eval(int instr) 
+void eval(int ip, int instr) 
 {
   decode(instr);
   if (instrNum <= 5) {
@@ -147,7 +147,7 @@ void eval(int instr)
   ip++;
 }
 
-int fetch() 
+int fetch(int bytecode_program[100], int ip) 
 {
   return bytecode_program[ip];
 }
